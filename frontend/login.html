@@ -3,48 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
   <title>Admin Login</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  <div class="login-container">
+  <header>
     <h1>Admin Login</h1>
-    <form id="login-form">
+  </header>
+
+  <main>
+    <form id="loginForm">
       <label for="username">Username</label>
       <input type="text" id="username" name="username" required>
-      
+
       <label for="password">Password</label>
       <input type="password" id="password" name="password" required>
-      
+
       <button type="submit">Login</button>
     </form>
-  </div>
-  <script>
-    document.getElementById('login-form').addEventListener('submit', async function (event) {
-  event.preventDefault();
+    <p id="error"></p>
+  </main>
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-
-  try {
-    const response = await fetch('http://localhost:3000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-    
-    const data = await response.json();
-    if (data.token) {
-      localStorage.setItem('authToken', data.token); // Store JWT token in localStorage
-      window.location.href = 'dashboard.html'; // Redirect to dashboard
-    } else {
-      alert(data.message);
-    }
-  } catch (error) {
-    console.error('Login failed:', error);
-  }
-});
-
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
