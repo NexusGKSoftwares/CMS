@@ -1,22 +1,27 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
+const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
+
+// Initialize express app
 const app = express();
 
-// Middleware
-app.use(express.json());
-app.use('/uploads', express.static('public/uploads'));
+// Connect to MongoDB
+connectDB();
 
-// MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/cms_website', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// Middleware
+app.use(bodyParser.json());
 
 // Routes
 app.use('/auth', authRoutes);
 app.use('/posts', postRoutes);
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Serve static files (images)
+app.use('/uploads', express.static('public/uploads'));
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
