@@ -1,23 +1,26 @@
-// Fetch posts and populate the homepage
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-      const response = await fetch('/posts'); // Replace with your backend route
-      const posts = await response.json();
-  
-      const postsContainer = document.getElementById('posts');
-      posts.forEach(post => {
-        const postElement = document.createElement('div');
-        postElement.classList.add('post');
-        postElement.innerHTML = `
-          <h2>${post.title}</h2>
-          <img src="${post.image}" alt="${post.title}" />
-          <p>${post.content.substring(0, 100)}...</p>
-          <a href="/post/${post.slug}">Read more</a>
-        `;
-        postsContainer.appendChild(postElement);
-      });
-    } catch (error) {
-      console.error('Error loading posts:', error);
-    }
-  });
-  
+// main.js
+
+// Fetch posts and display them on the homepage
+document.addEventListener('DOMContentLoaded', function() {
+  fetchPosts();
+});
+
+// Function to fetch posts
+async function fetchPosts() {
+  const postsContainer = document.getElementById('posts');
+  try {
+    const response = await fetch('http://localhost:5000/posts');
+    const posts = await response.json();
+    postsContainer.innerHTML = posts.map(post => {
+      return `
+        <div class="post">
+          <h2><a href="post.html?id=${post._id}">${post.title}</a></h2>
+          <img src="${post.image}" alt="${post.title}">
+          <p>${post.content.slice(0, 100)}...</p>
+        </div>
+      `;
+    }).join('');
+  } catch (error) {
+    postsContainer.innerHTML = '<p>Failed to load posts. Please try again later.</p>';
+  }
+}
