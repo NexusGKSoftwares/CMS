@@ -30,19 +30,21 @@ router.delete('/delete/:id', async (req, res) => {
 
 // Add a new post
 router.post('/add', async (req, res) => {
-  const { title, content, image } = req.body;
+  const { title, content, image } = req.body; // Retrieve data from request body
 
   try {
+      // Create a new post
       const newPost = new Post({
           title,
+          slug: title.toLowerCase().replace(/ /g, '-'), // Generate a slug from the title
           content,
-          image: image || '', // If no image URL is provided, default to empty string
+          image: image || '', // Default to empty string if no image is provided
       });
 
-      // Save the new post to the database
-      await newPost.save();
+      await newPost.save(); // Save the post to the database
       res.status(201).json({ message: 'Post added successfully', newPost });
   } catch (error) {
       res.status(500).json({ error: error.message });
   }
 });
+
