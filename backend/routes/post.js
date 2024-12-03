@@ -1,20 +1,20 @@
 // routes/post.js
 
-// Edit a post by ID
-router.put('/edit/:id', async (req, res) => {
-  const { title, content, image } = req.body;
-
+// Get a single post by ID
+router.get('/:id', async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(
-      req.params.id,
-      { title, content, image },
-      { new: true } // Return the updated post
-    );
-    res.json({ message: 'Post updated successfully', post });
+      const post = await Post.findById(req.params.id);
+
+      if (!post) {
+          return res.status(404).json({ message: 'Post not found' });
+      }
+
+      res.json(post);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
+
 // routes/post.js
 
 // Delete a post by ID
