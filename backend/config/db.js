@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/CMS/backend/', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    // Use IPv4 localhost instead of IPv6
+    await mongoose.connect('mongodb://127.0.0.1:27017/CMS', {
+      useNewUrlParser: true, 
+      useUnifiedTopology: true
     });
     console.log('MongoDB Connected');
   } catch (err) {
-    console.error(err);
-    process.exit(1);
+    console.error('MongoDB connection error:', err);
+    process.exit(1); // Exit process if connection fails
   }
 };
 
