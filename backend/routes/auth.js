@@ -1,36 +1,31 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const User = require('../models/User'); // Make sure this path is correct
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 const router = express.Router();
 
-// Admin registration route
-router.post('/register', async (req, res) => {
+// Admin login route
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  
+  const user = await User.findOne({ username });
 
-  // Check if username already exists
-  const existingUser = await User.findOne({ username });
-  if (existingUser) {
-    return res.status(400).json({ msg: 'Username already taken' });
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid credentials' });
   }
 
-  // Hash the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
+  const isMatch = await user.matchPassword(password);
 
-  try {
-    // Create the new user (admin)
-    const newUser = new User({
-      username,
-      password: hashedPassword,
-    });
-
-    // Save the user to the database
-    await newUser.save();
-    res.status(201).json({ msg: 'Admin registered successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ msg: 'Server error' });
+  if (!isMatch) {
+    return res.status(401).json({ message: 'Invalid credentials' });
   }
+
+  // Create JWT token
+  const token = jwt.sign({ id: user._id, username: user.username }, 'your_jwt_secret', {
+    expiresIn: '1h',
+  });
+
+  res.json({ token });
 });
 
 module.exports = router;
