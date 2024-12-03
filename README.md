@@ -8,12 +8,57 @@ Welcome to the **CMS Website**! This is a Content Management System (CMS) that a
 ---
 
 ## Features ✨
+### 1. Login Authentication 🔒
 
 - **Admin Login** 🔐: Secure authentication using JWT tokens.
-- **Dashboard** 📊: View, edit, and delete posts.
-- **CRUD Operations** 📝: Add, edit, and delete blog posts from the admin panel.
-- **Slug Handling** 🏷️: Unique URL slugs for posts.
-- **Responsive Design** 📱: Works on all devices.
+![Login Page](screenshots/login.png)
+- **Admin Dashboard** 📊: Access to the admin panel after successful login.
+
+
+- **Post Management** 📝: Add, edit, and delete posts with ease.
+
+- **Session Management** 🕒: Manage user sessions using JWT tokens.
+![Add Post](screenshots/new.png)
+- **Responsive Design** 📱: Works seamlessly on all devices.
+
+- **User-Friendly Interface** 🎉: Easy to navigate and use.
+![Delete Post](screenshots/delete.png)
+- **Error Handling** 🚫: Handles errors and exceptions gracefully.
+
+
+### 2. Post Management 
+- **Add Post** 📝: Create new posts with ease.
+- **Edit Post** ✍️: Update existing posts with ease.
+![Edit Post](screenshots/edit.png)
+- **Delete Post** 🚮: Remove unwanted posts with ease.
+- **Fetch Posts** 📊: Retrieve a list of all posts.
+### 3. Session Management
+- **Login** 🔒: Securely log in to the admin panel.
+- **Logout** 🔓: Log out of the admin panel securely.
+### 4. Responsive Design
+- **Mobile-Friendly** 📱: Works seamlessly on all devices.
+### 5. User-Friendly Interface
+- **Easy Navigation** 🎉: Easy to navigate and use.
+### 6. Error Handling
+- **Error Messages** 🚫: Handles errors and exceptions gracefully
+### 7. JWT Tokens
+- **Secure Authentication** 🔒: Secure authentication using JWT tokens
+
+### 8. Admin Dashboard
+![Admin Dashboard](screenshots/dash.png)
+- **Posts List** 📊: View a list of all posts.
+- **Add Post** 📝: Create new posts with ease.
+- **Edit Post** ✍️: Update existing posts with ease.
+- **Delete Post** 🚮: Remove unwanted posts with ease
+### 9. Posts List
+- **Fetch Posts** 📊: Retrieve a list of all posts
+![Posts List](screenshots/fetched.png)
+### 10. Error Messages
+- **Error Messages** 🚫: Handles errors and exceptions gracefully
+
+---
+
+
 
 ---
 
