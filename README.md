@@ -186,8 +186,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact 📬
 
-- **Author**: [Your Name](https://yourwebsite.com)
-- **Email**: your.email@example.com
+- **Author**: [NexusGKSoftwares](https://wa.link/w9kp2f)
+- **Email**: nexusgksoftwares@gmail.com
 
 ---
 
