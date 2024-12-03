@@ -63,3 +63,40 @@ async function deletePost(postId) {
     alert('Error: ' + error.message);
   }
 }
+// admin.js
+
+document.getElementById('addPostForm').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const title = document.getElementById('title').value;
+  const slug = document.getElementById('slug').value;
+  const content = document.getElementById('content').value;
+  const image = document.getElementById('image').files[0];
+
+  const token = localStorage.getItem('jwtToken');
+  const formData = new FormData();
+  formData.append('title', title);
+  formData.append('slug', slug);
+  formData.append('content', content);
+  formData.append('image', image);
+
+  try {
+    const response = await fetch('http://localhost:5000/posts/add', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      },
+      body: formData
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      alert('Post added successfully!');
+      window.location.href = 'dashboard.html'; // Redirect to dashboard
+    } else {
+      alert('Error adding post: ' + data.msg);
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  }
+});
