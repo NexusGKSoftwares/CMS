@@ -15,7 +15,7 @@ async function fetchPosts() {
   const token = localStorage.getItem('jwtToken');
 
   try {
-    const response = await fetch('http://localhost:5000/posts', {
+    const response = await fetch('mongodb://127.0.0.1:27017/CMS', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -46,7 +46,7 @@ function logout() {
 async function deletePost(postId) {
   const token = localStorage.getItem('jwtToken');
   try {
-    const response = await fetch(`http://localhost:5000/posts/delete/${postId}`, {
+    const response = await fetch(`mongodb://127.0.0.1:27017/CMS/delete/${postId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -81,7 +81,7 @@ document.getElementById('addPostForm').addEventListener('submit', async function
   formData.append('image', image);
 
   try {
-    const response = await fetch('http://localhost:5000/posts/add', {
+    const response = await fetch('mongodb://127.0.0.1:27017/CMS/add', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`
