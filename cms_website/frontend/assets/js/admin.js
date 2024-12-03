@@ -22,4 +22,20 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
       document.getElementById('error').textContent = 'An error occurred. Please try again.';
     }
   });
+  // Fetch and display posts in the admin dashboard
+async function fetchPosts() {
+    const response = await fetch('/posts');
+    const posts = await response.json();
+    
+    const postList = document.getElementById('postList');
+    posts.forEach(post => {
+      const li = document.createElement('li');
+      li.textContent = `${post.title} - ${post.createdAt}`;
+      postList.appendChild(li);
+    });
+  }
+  
+  if (window.location.pathname.includes('dashboard.html')) {
+    fetchPosts();
+  }
   
