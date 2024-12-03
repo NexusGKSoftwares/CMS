@@ -1,55 +1,158 @@
-/* Global Styles */
+/* Global Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  font-family: 'Arial', sans-serif; /* Change to your preferred font */
+  background-color: #f5f5f5; /* Light background for the page */
+  color: #333; /* Dark text color for better readability */
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #007bff; /* Change link color on hover */
+}
+/* Navbar Styles */
+nav {
+  background-color: #333;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff9900; /* Change color on hover */
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  header {
-    background-color: #333;
-    color: white;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 0.5rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  main {
-    padding: 1rem;
-  }
-  
-  .post, .form-container {
-    margin: 1rem 0;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  input, textarea, button {
-    display: block;
-    width: 100%;
+
+  nav a {
     margin: 0.5rem 0;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
   }
-  
-  button {
-    background-color: #333;
-    color: white;
-    cursor: pointer;
+}
+/* Button Styles */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+button:active {
+  background-color: #003d82; /* Even darker blue on click */
+}
+/* Card Styles */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin: 1rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.card img {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.card .title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.card .content {
+  font-size: 1rem;
+  color: #555;
+}
+/* Form Styles */
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 2rem;
+  text-align: center;
+}
+
+footer a {
+  color: #fff;
+  margin: 0 1rem;
+}
+
+footer a:hover {
+  color: #ff9900;
+}
+
+/* Small screen styles */
+@media (max-width: 768px) {
+  footer {
+    font-size: 0.9rem;
   }
-  
-  button:hover {
-    background-color: #555;
-  }
-  
+}
