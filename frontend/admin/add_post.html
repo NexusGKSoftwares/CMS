@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Post - CMS</title>
+    <title>Edit Post - CMS</title>
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Add New Post</h1>
+            <h1>Edit Post</h1>
             <nav>
                 <ul>
                     <li><a href="dashboard.html" class="btn-primary">Back to Dashboard</a></li>
@@ -18,24 +18,21 @@
         </div>
     </header>
 
-    <section class="add-post-content">
+    <section class="edit-post-content">
         <div class="container">
-            <h2>Create a New Post</h2>
-            <form id="add-post-form">
+            <h2>Edit Post</h2>
+            <form id="edit-post-form">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
-
                 <label for="content">Content:</label>
                 <textarea id="content" name="content" required></textarea>
-
                 <label for="image">Image URL:</label>
                 <input type="text" id="image" name="image">
-
-                <button type="submit" class="btn-primary">Add Post</button>
+                <button type="submit" class="btn-primary">Save Changes</button>
             </form>
         </div>
     </section>
 
-    <script src="../assets/js/add_post.js"></script>
+    <script src="../assets/js/edit_post.js"></script>
 </body>
 </html>
