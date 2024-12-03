@@ -3,24 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Post</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Add New Post</title>
 </head>
 <body>
   <div class="form-container">
-    <h1>Add New Post</h1>
-    <form id="add-post-form">
-      <label for="title">Title</label>
-      <input type="text" id="title" name="title" required>
-      
-      <label for="content">Content</label>
-      <textarea id="content" name="content" required></textarea>
-      
-      <label for="image">Upload Image</label>
-      <input type="file" id="image" name="image">
-      
+    <h2>Add New Post</h2>
+    <form id="addPostForm">
+      <input type="text" name="title" placeholder="Post Title" required />
+      <input type="text" name="slug" placeholder="Post Slug" required />
+      <input type="file" name="image" accept="image/*" required />
+      <textarea name="content" placeholder="Post Content" required></textarea>
       <button type="submit">Add Post</button>
     </form>
   </div>
+  <script src="../assets/js/admin.js"></script>
 </body>
 </html>
