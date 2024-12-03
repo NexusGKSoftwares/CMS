@@ -1,63 +1,33 @@
-// main.js
+// assets/js/main.js
 
-// Fetch posts and display them on the homepage
-document.addEventListener('DOMContentLoaded', function() {
-  fetchPosts();
-});
-
-// Function to fetch posts
+// Function to fetch posts from the backend
 async function fetchPosts() {
-  const postsContainer = document.getElementById('posts');
   try {
-    const response = await fetch('http://localhost:5000/posts');
-    const posts = await response.json();
-    postsContainer.innerHTML = posts.map(post => {
-      return `
-        <div class="post">
-          <h2><a href="post.html?id=${post._id}">${post.title}</a></h2>
-          <img src="${post.image}" alt="${post.title}">
-          <p>${post.content.slice(0, 100)}...</p>
-        </div>
-      `;
-    }).join('');
+      const response = await fetch('http://localhost:5000/posts'); // Replace with your actual backend URL
+      const posts = await response.json(); // Parse the response as JSON
+
+      const postsContainer = document.getElementById('post-cards-container');
+      postsContainer.innerHTML = ''; // Clear any existing posts
+
+      // Loop through the posts and create post cards
+      posts.forEach(post => {
+          const postCard = document.createElement('div');
+          postCard.classList.add('post-card');
+
+          // Insert post content into the card
+          postCard.innerHTML = `
+              <h3>${post.title}</h3>
+              <p>${post.content.slice(0, 100)}...</p> <!-- Display a short excerpt -->
+              <a href="#">Read more</a>
+          `;
+
+          // Append the card to the container
+          postsContainer.appendChild(postCard);
+      });
   } catch (error) {
-    postsContainer.innerHTML = '<p>Failed to load posts. Please try again later.</p>';
+      console.error('Error fetching posts:', error);
   }
 }
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-  e.preventDefault(); // Prevent the form from submitting normally
 
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-
-  // Prepare the data to send
-  const data = { username, password };
-
-  try {
-    // Send the POST request to register the admin
-    const response = await fetch('http://localhost:5000/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    const result = await response.json(); // Parse JSON response
-
-    // Display the message on the page
-    const messageElement = document.getElementById('message');
-    if (response.ok) {
-      messageElement.textContent = result.msg;
-      messageElement.style.color = 'green';
-    } else {
-      messageElement.textContent = result.msg;
-      messageElement.style.color = 'red';
-    }
-  } catch (error) {
-    // Handle any errors that occur during the fetch request
-    document.getElementById('message').textContent = 'An error occurred.';
-    document.getElementById('message').style.color = 'red';
-  }
-});
-
+// Call the function to fetch and display posts when the page loads
+document.addEventListener('DOMContentLoaded', fetchPosts);
