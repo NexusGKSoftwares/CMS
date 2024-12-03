@@ -1,21 +1,37 @@
 // routes/post.js
+const express = require('express');
+const router = express.Router();
+const Post = require('../models/Post');  // Ensure Post model is correctly imported
 
-// Edit a post by ID
+// PUT route for editing a post by ID
 router.put('/edit/:id', async (req, res) => {
-  const { title, content, image } = req.body;
+    const { title, slug, content, image } = req.body;
 
-  try {
-    const post = await Post.findByIdAndUpdate(
-      req.params.id,
-      { title, content, image },
-      { new: true } // Return the updated post
-    );
-    res.json({ message: 'Post updated successfully', post });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    try {
+        // Check if the post exists
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Update the post
+        post.title = title || post.title;
+        post.slug = slug || post.slug;
+        post.content = content || post.content;
+        post.image = image || post.image;
+
+        // Save the updated post
+        await post.save();
+
+        res.json({ message: 'Post updated successfully', post });
+    } catch (error) {
+        console.error('Error updating post:', error);
+        res.status(500).json({ error: error.message });
+    }
 });
-// routes/post.js
+
+module.exports = router;
+
 
 // Delete a post by ID
 router.delete('/delete/:id', async (req, res) => {
