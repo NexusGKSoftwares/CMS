@@ -1,34 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - CMS</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <title>Admin Login</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Admin Login</h1>
-        </div>
-    </header>
+  <header>
+    <h1>Admin Login</h1>
+  </header>
 
-    <section class="login-content">
-        <div class="container">
-            <h2>Login to Your Account</h2>
-            <form id="login-form">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+  <main>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
 
-                <button type="submit" class="btn-primary">Login</button>
-            </form>
-            <p id="login-error" class="error-message" style="color: red; display: none;"></p>
-        </div>
-    </section>
+      <button type="submit">Login</button>
+    </form>
+    <p id="error"></p>
+  </main>
 
-    <script src="../assets/js/login.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
