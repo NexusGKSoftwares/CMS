@@ -19,5 +19,32 @@
       <button type="submit">Login</button>
     </form>
   </div>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    const response = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    
+    const data = await response.json();
+    if (data.token) {
+      localStorage.setItem('authToken', data.token); // Store JWT token in localStorage
+      window.location.href = 'dashboard.html'; // Redirect to dashboard
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error('Login failed:', error);
+  }
+});
+
+  </script>
 </body>
 </html>
