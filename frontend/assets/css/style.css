@@ -354,7 +354,9 @@ form .form-header {
     font-size: 14px;
   }
 }
-
+header .logo img {
+  height: 50px; /* Adjust as per your logo size */
+}
 nav ul {
   list-style-type: none;
   padding: 0;
