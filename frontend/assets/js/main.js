@@ -25,17 +25,16 @@ async function fetchPosts() {
   }
 }
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
+  e.preventDefault(); // Prevent the form from submitting normally
 
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
 
-  const data = {
-    username,
-    password,
-  };
+  // Prepare the data to send
+  const data = { username, password };
 
   try {
+    // Send the POST request to register the admin
     const response = await fetch('http://localhost:5000/auth/register', {
       method: 'POST',
       headers: {
@@ -44,17 +43,21 @@ document.getElementById('registerForm').addEventListener('submit', async (e) => 
       body: JSON.stringify(data),
     });
 
-    const result = await response.json();
+    const result = await response.json(); // Parse JSON response
 
+    // Display the message on the page
+    const messageElement = document.getElementById('message');
     if (response.ok) {
-      document.getElementById('message').textContent = result.msg;
-      document.getElementById('message').style.color = 'green';
+      messageElement.textContent = result.msg;
+      messageElement.style.color = 'green';
     } else {
-      document.getElementById('message').textContent = result.msg;
-      document.getElementById('message').style.color = 'red';
+      messageElement.textContent = result.msg;
+      messageElement.style.color = 'red';
     }
   } catch (error) {
+    // Handle any errors that occur during the fetch request
     document.getElementById('message').textContent = 'An error occurred.';
     document.getElementById('message').style.color = 'red';
   }
 });
+
