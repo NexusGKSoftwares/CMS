@@ -15,3 +15,14 @@ router.put('/edit/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// routes/post.js
+
+// Delete a post by ID
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Post deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
