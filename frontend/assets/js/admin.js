@@ -81,7 +81,7 @@ document.getElementById('addPostForm').addEventListener('submit', async function
   formData.append('image', image);
 
   try {
-    const response = await fetch('mongodb://127.0.0.1:27017/CMS/add', {
+    const response = await fetch('http://localhost:5000/posts/add', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`
