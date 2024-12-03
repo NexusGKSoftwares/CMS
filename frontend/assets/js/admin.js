@@ -15,7 +15,7 @@ async function fetchPosts() {
   const token = localStorage.getItem('jwtToken');
 
   try {
-    const response = await fetch('mongodb://127.0.0.1:27017/CMS', {
+    const response = await fetch('http://localhost:5000/posts', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
