@@ -354,3 +354,142 @@ form .form-header {
     font-size: 14px;
   }
 }
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  background-color: #007BFF;
+  color: white;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.cta-btn {
+  background-color: #ff7f50;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.cta-btn:hover {
+  background-color: #ff5722;
+}
+
+/* Section Styles */
+section {
+  padding: 60px 0;
+  margin-bottom: 30px;
+  background-color: white;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+section p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+section ul li {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* About Section Styles */
+#about {
+  background-color: #e9ecef;
+}
+
+/* Team Section Styles */
+#team {
+  background-color: #f8f9fa;
+}
+
+/* Contact Section Styles */
+#contact {
+  background-color: #e9ecef;
+}
+
+/* Footer Styles */
+footer {
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* Main Content Section */
+.main-content {
+  padding: 60px 0;
+  background-color: #f8f9fa;
+}
+
+.post-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post-cards .post-card {
+  background-color: white;
+  border: 1px solid #ddd;
+  width: 30%;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-cards .post-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.post-cards .post-card p {
+  font-size: 16px;
+  color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .post-cards {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .post-cards .post-card {
+      width: 80%;
+  }
+}
