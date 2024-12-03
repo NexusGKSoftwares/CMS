@@ -6,11 +6,14 @@ const postId = urlParams.get('id'); // Get the ID from the URL
 
 // Function to fetch the post data and pre-fill the form
 async function fetchPostData() {
+    console.log('Post ID:', postId); // Debugging
+
     try {
-        // Fetch the post details from the backend
         const response = await fetch(`http://localhost:5000/posts/${postId}`);
+        console.log('Response:', response); // Debugging
+
         if (!response.ok) {
-            throw new Error('Failed to fetch post data');
+            throw new Error(`Failed to fetch post data: ${response.statusText}`);
         }
 
         const post = await response.json();
@@ -28,7 +31,7 @@ async function fetchPostData() {
 
 // Function to handle form submission for updating the post
 async function handleFormSubmit(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     const title = document.getElementById('title').value;
     const slug = document.getElementById('slug').value;
@@ -36,7 +39,6 @@ async function handleFormSubmit(event) {
     const image = document.getElementById('image').value;
 
     try {
-        // Send the updated post data to the backend
         const response = await fetch(`http://localhost:5000/posts/edit/${postId}`, {
             method: 'PUT',
             headers: {
@@ -47,11 +49,11 @@ async function handleFormSubmit(event) {
 
         const data = await response.json();
 
-        if (data.message === 'Post updated successfully') {
+        if (response.ok) {
             alert('Post updated successfully!');
             window.location.href = 'dashboard.html'; // Redirect to the dashboard
         } else {
-            alert('Failed to update the post.');
+            alert('Failed to update the post: ' + data.message);
         }
     } catch (error) {
         console.error('Error updating post:', error);
