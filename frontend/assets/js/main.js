@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function fetchPosts() {
   const postsContainer = document.getElementById('posts');
   try {
-    const response = await fetch('mongodb://127.0.0.1:27017/CMS/posts');
+    const response = await fetch('http://localhost:5000/posts');
     const posts = await response.json();
     postsContainer.innerHTML = posts.map(post => {
       return `
