@@ -1,41 +1,55 @@
 const express = require('express');
-const router = express.Router();
+const multer = require('multer');
 const Post = require('../models/Post');
+const router = express.Router();
+
+// Multer configuration for file uploads (image)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 // Create a new post
-router.post('/add', async (req, res) => {
-  const { title, content, image } = req.body;
+router.post('/add', upload.single('image'), async (req, res) => {
+  const { title, slug, content } = req.body;
   try {
-    const newPost = new Post({ title, content, image });
+    const newPost = new Post({
+      title,
+      slug,
+      content,
+      image: req.file ? `/uploads/${req.file.filename}` : undefined,
+    });
     await newPost.save();
-    res.status(201).json({ message: 'Post created successfully!' });
+    res.status(201).json({ msg: 'Post created successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
   }
 });
 
-// Retrieve all posts
-router.get('/', async (req, res) => {
-  try {
-    const posts = await Post.find();
-    res.status(200).json(posts);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Update a post
-router.put('/edit/:id', async (req, res) => {
-  const { title, content, image } = req.body;
+// Edit a post
+router.put('/edit/:id', upload.single('image'), async (req, res) => {
+  const { title, slug, content } = req.body;
   try {
     const updatedPost = await Post.findByIdAndUpdate(
       req.params.id,
-      { title, content, image, updatedAt: Date.now() },
+      {
+        title,
+        slug,
+        content,
+        image: req.file ? `/uploads/${req.file.filename}` : undefined,
+      },
       { new: true }
     );
-    res.status(200).json(updatedPost);
+    res.json({ msg: 'Post updated successfully', updatedPost });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
   }
 });
 
@@ -43,9 +57,21 @@ router.put('/edit/:id', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
   try {
     await Post.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: 'Post deleted successfully!' });
+    res.json({ msg: 'Post deleted successfully' });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
+  }
+});
+
+// Get all posts
+router.get('/', async (req, res) => {
+  try {
+    const posts = await Post.find();
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: 'Server error' });
   }
 });
 
