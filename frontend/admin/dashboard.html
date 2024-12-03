@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
   <link rel="stylesheet" href="../assets/css/style.css">
+  <title>Admin Dashboard</title>
 </head>
 <body>
   <header>
     <h1>Admin Dashboard</h1>
-    <nav>
-      <a href="add_post.html">Add Post</a>
-      <a href="edit_post.html">Edit Post</a>
-      <a href="delete_post.html">Delete Post</a>
-      <a href="logout.html">Logout</a>
-    </nav>
+    <button id="logoutBtn">Logout</button>
   </header>
+
   <main>
-    <section>
-      <h2>Recent Posts</h2>
-      <div id="admin-posts">
-        <!-- Admin view of posts -->
-      </div>
-    </section>
+    <h2>Manage Posts</h2>
+    <div id="postsList">
+      <!-- List of posts will be dynamically injected here -->
+    </div>
+    <button id="addPostBtn">Add New Post</button>
   </main>
+
+  <script src="../assets/js/admin.js"></script>
 </body>
 </html>
