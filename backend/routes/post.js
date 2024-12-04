@@ -1,7 +1,16 @@
-// routes/post.js
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/Post');  // Ensure Post model is correctly imported
+const Post = require('../models/Post'); // Ensure Post model is correctly imported
+
+// GET route to fetch all posts
+router.get('/', async (req, res) => {
+  try {
+      const posts = await Post.find(); // Fetch all posts from the database
+      res.json(posts); // Send the posts as a JSON response
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
 
 // PUT route for editing a post by ID
 router.put('/edit/:id', async (req, res) => {
@@ -30,29 +39,31 @@ router.put('/edit/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
-
-
-// Delete a post by ID
+// DELETE route for deleting a post by ID
 router.delete('/delete/:id', async (req, res) => {
   try {
-    await Post.findByIdAndDelete(req.params.id);
+    const post = await Post.findByIdAndDelete(req.params.id);
+    if (!post) {
+        return res.status(404).json({ message: 'Post not found' });
+    }
     res.json({ message: 'Post deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
-// routes/post.js
 
-// Add a new post
+// POST route for adding a new post
 router.post('/add', async (req, res) => {
   const { title, content, image } = req.body; // Retrieve data from request body
 
   try {
+      // Generate a slug from the title
+      const slug = title.toLowerCase().replace(/ /g, '-');
+
       // Create a new post
       const newPost = new Post({
           title,
-          slug: title.toLowerCase().replace(/ /g, '-'), // Generate a slug from the title
+          slug,
           content,
           image: image || '', // Default to empty string if no image is provided
       });
@@ -64,3 +75,4 @@ router.post('/add', async (req, res) => {
   }
 });
 
+module.exports = router; // Don't forget to export the router
